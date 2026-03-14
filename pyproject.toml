@@ -1,8 +1,15 @@
 [project]
 name = "sysprobe"
-version = "0.1.0"
+version = "0.0.1"
 description = "Linux system diagnostic tool"
 requires-python = ">=3.8"
+dependencies = [
+    "typer",
+    "psutil"
+]
+
+[tool.setuptools]
+packages = ["sysprobe"]
 
 [project.scripts]
-sysprobe = "sysprobe:main"
+sysprobe = "sysprobe.cli:app"
