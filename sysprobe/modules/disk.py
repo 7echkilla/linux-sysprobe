@@ -1,5 +1,6 @@
 import shutil
 import psutil
+import time
 
 def get_real_partitions():
     valid_filesystems = {"ext4", "xfs", "btrfs", "ntfs", "vfat"}
@@ -16,7 +17,7 @@ def get_real_partitions():
 
     return partitions
 
-def run():
+def get_disk_usage():
     constant = 1024 ** 3
 
     print("\nDisk Usage")
@@ -35,6 +36,26 @@ def run():
 
         except PermissionError:
             print(f"Permission denied for {partition}")
+
+def get_disk_speed(interval=1):
+    constant = 1024 ** 2
+
+    print("\nDisk I/O Speed (per second)")
+    print("---------------------------")
+
+    io_1 = psutil.disk_io_counters()
+    time.sleep(interval)
+    io_2 = psutil.disk_io_counters()
+
+    read_speed = (io_2.read_bytes - io_1.read_bytes) / interval
+    write_speed = (io_2.write_bytes - io_1.write_bytes) / interval
+
+    print(f"Read : {read_speed / constant:.2f} MB/s")
+    print(f"Write: {write_speed / constant:.2f} MB/s")
+
+def run():
+    get_disk_usage()
+    get_disk_speed()
 
 if __name__ == "__main__":
     run()
