@@ -1,4 +1,4 @@
-def get_load_avg():
+def get_load_average():
     with open("/proc/loadavg") as file:
         load = file.read().split()
 
