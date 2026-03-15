@@ -16,7 +16,16 @@ def get_system_info():
 
     hours = int(uptime_seconds // 3600)
 
+    print("System Information")
+    print("------------------")
+
     print(f"Kernel: {kernel}")
     print(f"CPU Cores: {cpu_cores}")
     print(f"Memory: {mem_total:.2f} GB")
     print(f"Uptime: {hours} hours")
+
+def run():
+    get_system_info()
+
+if __name__ == "__main__":
+    run()

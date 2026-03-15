@@ -1,6 +1,5 @@
-import shutil
-import psutil
 import time
+import psutil
 
 def get_real_partitions():
     valid_filesystems = {"ext4", "xfs", "btrfs", "ntfs", "vfat"}
