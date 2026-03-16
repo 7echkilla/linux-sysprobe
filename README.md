@@ -1,6 +1,6 @@
-# Linux System Diagnostic CLI Tool
+# Linux System Diagnostic Tool
 
-Linux system diagnostics CLI tool that aggregates low-level system information from core Linux interfaces including:
+A Linux system diagnostics tool that aggregates low-level system information from core Linux interfaces including:
 - /proc
 - /sys
 - dmesg
@@ -8,6 +8,10 @@ Linux system diagnostics CLI tool that aggregates low-level system information f
 - Docker runtime
 
 The tool helps developers quickly inspect system health, kernel errors and container activity. Heavily inspired by Linux debugging workflows used in production systems.
+
+The primary functions are:
+- Inspect system state interactively
+- Generate a support bundle for debugging
 
 ## Features
 
@@ -24,27 +28,5 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -e .
 
-sysprobe --system
-sysprobe --disk
-sysprobe --docker
-sysprobe --logs
-sysprobe --all
-sysprobe --json
+probe system
 ```
-
-## Project Structure
-```
-linux-sysprobe/
-│
-├── sysprobe.py
-├── modules/
-│   ├── system_info.py
-│   ├── disk_usage.py
-│   ├── docker_status.py
-│   ├── kernel_logs.py
-│   └── load_avg.py
-│
-├── README.md
-└── requirements.txt
-```
-
