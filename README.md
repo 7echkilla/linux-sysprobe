@@ -1,50 +1,18 @@
-# Linux System Diagnostic CLI Tool
+# Linux System Diagnostic Tool
 
-Linux system diagnostics CLI tool that aggregates low-level system information from core Linux interfaces including:
-- /proc
-- /sys
-- dmesg
-- journalctl
-- Docker runtime
+A Python-based diagnostic tool that provides real-time system metrics and performance data, such as CPU usage, disk usage and more. It is designed to be modular, allowing additional diagnostic plugins to be added easily.
 
-The tool helps developers quickly inspect system health, kernel errors and container activity. Heavily inspired by Linux debugging workflows used in production systems.
+The tool is built with **Typer** to provide a user-friendly CLI and it includes a live dashboard for monitoring multiple system metrics simultaneously. Heavily inspired by Linux debugging workflows used in production systems.
 
-## Features
+### Features
+- Modular design: Easily extendable with custom plugins
+- CLI commands: View various system metrics through simple commands
+- Live dashboard: Monitor multiple system metrics simultaneously in real-time
 
-- System information (CPU, memory, kernel)
-- Disk usage
-- Docker container status
-- System load averages
-- Recent kernel errors
+## Installation
+1. Clone the repository: `git clone https://github.com/7echkilla/probe.git`
+2. Install the tool: `pip install -e .`
 
-## Example Usage
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -e .
-
-sysprobe --system
-sysprobe --disk
-sysprobe --docker
-sysprobe --logs
-sysprobe --all
-sysprobe --json
-```
-
-## Project Structure
-```
-linux-sysprobe/
-│
-├── sysprobe.py
-├── modules/
-│   ├── system_info.py
-│   ├── disk_usage.py
-│   ├── docker_status.py
-│   ├── kernel_logs.py
-│   └── load_avg.py
-│
-├── README.md
-└── requirements.txt
-```
-
+## Usage
+1. List all available modules: `probe --help`
+2. Live dashboard: `probe-gui`
