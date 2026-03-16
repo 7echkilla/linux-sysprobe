@@ -13,6 +13,15 @@ The tool is built with **Typer** to provide a user-friendly CLI and it includes 
 1. Clone the repository: `git clone https://github.com/7echkilla/probe.git`
 2. Install the tool: `pip install -e .`
 
+### Requirements
+- Python3.10+
+- `psutil` for system metrics
+- `typer` for CLI 
+
 ## Usage
 1. List all available modules: `probe --help`
 2. Live dashboard: `probe-gui`
+
+## Plugin System
+
+The project is designed with modular plugins. You can easily add new plugins by creating new modules under the `probe/plugins` directory. Each plugin should subclass `Plugin` and implement its `collect()` method to return a dictionary of diagnostic data. The plugin will then be automatically discovered and available as a command under Typer.
