@@ -1,15 +1,38 @@
-# import psutil
+import psutil
 
-# from probe.probe.module import Plugin
+from probe.module import Module
 
-# class CPU(Plugin):
-#     """Utility for CPU"""
+class CPU(Module):
+    def __init__(self):
+        """
+        Metrics relevant to CPU
+        """
+        self.name = "cpu"
+        self.description = "CPU metrics"
 
-#     name = "cpu"
-#     description = "CPU utility"
+    def get_data(self):
+        """
+        Return dictionary with all CPU metrics
+        """
+        data = {}
+        
+        data.update(self._get_cpu_usage())
+        data.update(self._get_cpu_cores())
 
-#     def collect(self):
-#         return self._get_cpu_usage()
+        return data
     
-#     def _get_cpu_usage(self):
-#         return {"cpu_usage": psutil.cpu_percent}
+    def _get_cpu_usage(self):
+        """
+        Get current CPU usage percentage
+        """
+        cpu_usage = psutil.cpu_percent()
+        
+        return {"CPU Usage (%)": cpu_usage}
+    
+    def _get_cpu_cores(self):
+        """
+        Get number of CPU cores
+        """
+        cpu_count = psutil.cpu_count(logical=False)
+
+        return {"CPU Cores": cpu_count}

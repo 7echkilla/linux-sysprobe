@@ -19,20 +19,21 @@ class Module(ABC):
         """
         Generate app command for Typer extension
         """
-
         app = typer.Typer(help=self.description)
 
         # Default behaviour when no subcommand is provided
         @app.callback(invoke_without_command=True)
         def main(context: typer.Context):
             if (context.invoked_subcommand is None):
-                self.run()
+                self.print_data()
 
         # Explicit subcommand
-        app.command()(self.run)
+        app.command()(self.get_data)
 
         return app
 
-    def run(self):
+    def print_data(self):
         data = self.get_data()
-        print(data)
+        format = " | ".join(f"{metric}: {value}" for metric, value in data.items())
+
+        print(f"{self.name:10} {format}")

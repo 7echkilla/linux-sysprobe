@@ -3,8 +3,9 @@ import time
 from probe.loader import load_modules
 
 def run(interval=1):
-    """Load live dashboard"""
-
+    """
+    Load metrics for live monitoring
+    """
     plugins = load_modules()
 
     try:
