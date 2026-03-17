@@ -13,4 +13,4 @@ include = ["probe*"]
 
 [project.scripts]
 probe = "probe.cli:app"
-probe-gui = "probe.gui:run"
+probe-monitor = "probe.monitor:run"
