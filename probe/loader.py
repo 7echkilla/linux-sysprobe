@@ -17,7 +17,10 @@ def load_modules():
             if (isinstance(object, type) and issubclass(object, Module) and object is not Module):
                 instance = object()
 
-                if (instance.name in modules):
+                if (not instance.name):
+                    print(f"Skipped invalid module with no name")
+                
+                elif (instance.name in modules):
                     print(f"Skipped module with duplicate name: {instance.name}")
                 
                 else:
