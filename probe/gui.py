@@ -1,25 +1,25 @@
-import time
+# import time
 
-from probe.loader import load_plugins
+# from probe.loader import load_plugins
 
-def run(interval=1):
-    """Load live dashboard"""
+# def run(interval=1):
+#     """Load live dashboard"""
 
-    plugins = load_plugins()
+#     plugins = load_plugins()
 
-    while True:
+#     while True:
 
-        print("\033c", end="")
-        print("=== Live Dashboard ===\n")
+#         print("\033c", end="")
+#         print("=== Live Dashboard ===\n")
 
-        for plugin in plugins.values():
-            data = plugin.collect()
-            formatted = " | ".join(f"{k}: {v}" for k, v in data.items())
+#         for plugin in plugins.values():
+#             data = plugin.collect()
+#             formatted = " | ".join(f"{k}: {v}" for k, v in data.items())
 
-            print(f"{plugin.name:10} {formatted}")
+#             print(f"{plugin.name:10} {formatted}")
 
-        print("\nPress Ctrl+C to exit")
-        time.sleep(interval)
+#         print("\nPress Ctrl+C to exit")
+#         time.sleep(interval)
 
-if __name__ == "__main__":
-    run()
+# if __name__ == "__main__":
+#     run()

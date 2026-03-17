@@ -1,23 +1,29 @@
 import pkgutil
 import importlib
-import probe.plugins
+import probe.modules
 
-from probe.plugin import Plugin
+from probe.module import Module
 
-def load_plugins():
-    """Detect and return plugins from directory"""
+def load_modules():
+    """
+    Detect and load modules from designated directory
+    """
+    modules = {}
 
-    plugins = {}
+    for _, name, _ in pkgutil.iter_modules(probe.modules.__path__):
+        module = importlib.import_module(f"probe.modules.{name}")
 
-    for _, name, _ in pkgutil.iter_modules(probe.plugins.__path__):
-        plugin = importlib.import_module(f"probe.plugins.{name}")
-
-        for object in vars(plugin).values():
-            if (isinstance(object, type) and issubclass(object, Plugin) and object is not Plugin):
+        for object in vars(module).values():
+            if (isinstance(object, type) and issubclass(object, Module) and object is not Module):
                 instance = object()
-                plugins[instance.name] = instance
 
-    return plugins
+                if (instance.name in modules):
+                    print(f"Skipped module with duplicate name: {instance.name}")
+                
+                else:
+                    modules[instance.name] = instance
+
+    return modules
 
 if __name__ == "__main__":
-    print(load_plugins())
+    print(load_modules())
