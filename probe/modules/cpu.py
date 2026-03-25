@@ -18,6 +18,7 @@ class CPU(Module):
         
         data.update(self._get_cpu_usage())
         data.update(self._get_cpu_cores())
+        data.update(self._get_core_temperature())
 
         return data
     
@@ -36,3 +37,16 @@ class CPU(Module):
         cpu_count = psutil.cpu_count(logical=False)
 
         return {"CPU Cores": cpu_count}
+    
+    def _get_core_temperature(self):
+        """
+        Get CPU temperature (if supported)
+        """
+        try:
+            temperature = psutil.sensors_temperatures()
+            core_temperature = temperature.get('coretemp', [])
+            cpu_temperature = core_temperature[0].current if core_temperature else "N/A"
+        except AttributeError:
+            cpu_temperature = "N/A"
+        
+        return {"CPU Temperature (°C)": cpu_temperature}
