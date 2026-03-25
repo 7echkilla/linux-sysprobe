@@ -1,3 +1,5 @@
+import time
+import psutil
 import platform
 
 from probe.module import Module
@@ -12,7 +14,7 @@ class System(Module):
 
     def get_data(self):
         """
-        Return dictionary with all CPU metrics
+        Return dictionary with all system information
         """
         data = {}
         
@@ -20,7 +22,7 @@ class System(Module):
         data.update(self._get_os())
         data.update(self._get_kernel())
         data.update(self._get_architecture())
-        data.update(self._test())
+        data.update(self._get_uptime())
 
         return data
     
@@ -55,3 +57,19 @@ class System(Module):
         architecture = platform.machine()
 
         return {"Architecture": architecture}
+    
+    def _get_uptime(self):
+        """
+        Get system uptime
+        """
+        boot_time = psutil.boot_time()
+        elapsed_time = time.time() - boot_time
+
+        # Calculate hours, minutes and seconds
+        uptime_hours = int(elapsed_time // 3600)
+        uptime_minutes = int((elapsed_time % 3600) // 60)
+        uptime_seconds = int(elapsed_time % 60)
+
+        string = f"{uptime_hours} hours {uptime_minutes} minutes {uptime_seconds} seconds"
+
+        return {"Uptime": string}
