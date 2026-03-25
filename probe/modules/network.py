@@ -1,3 +1,5 @@
+import psutil
+
 from probe.module import Module
 
 class Memory(Module):
@@ -9,4 +11,11 @@ class Memory(Module):
         self.description = "Get network stats"
 
     def get_data(self):
-        return super().get_data()
+        """
+        Return dictionary with all network information
+        """
+        data = {}
+        
+
+        return data
+    
